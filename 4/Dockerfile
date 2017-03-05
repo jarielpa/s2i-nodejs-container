@@ -34,7 +34,7 @@ LABEL summary="Platform for building and running Node.js 6 applications" \
 #    yum clean all -y
 
 RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash - && \
-    yum install -y nodejs npm nss_wrapper --setopt=tsflags=nodocs --enablerepo=epel && \
+    yum install -y nodejs npm nss_wrapper && \
     yum clean all -y
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
