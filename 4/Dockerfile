@@ -26,12 +26,14 @@ LABEL summary="Platform for building and running Node.js 6 applications" \
       com.redhat.deployments-dir="/opt/app-root/src" \
       com.redhat.dev-mode.port="DEBUG_PORT:5858"
 
-RUN yum install -y centos-release-scl-rh && \
-    INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon nss_wrapper" && \
-    ln -s /usr/lib/node_modules/nodemon/bin/nodemon.js /usr/bin/nodemon && \
-    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
-    rpm -V $INSTALL_PKGS && \
-    yum clean all -y
+#RUN yum install -y centos-release-scl-rh && \
+#    INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon nss_wrapper" && \
+#    ln -s /usr/lib/node_modules/nodemon/bin/nodemon.js /usr/bin/nodemon && \
+#    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+#    rpm -V $INSTALL_PKGS && \
+#    yum clean all -y
+
+RUN yum install -y nodejs npm nss_wrapper --setopt=tsflags=nodocs --enablerepo=epel && yum clean all -y
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
